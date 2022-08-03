@@ -1,0 +1,19 @@
+pre-push:
+  commands:
+    gems-audit:
+      tags: backend security
+      run: bundle exec bundler-audit check --update
+    rspec:
+      tags: rspec
+      run: bundle exec rspec
+# frontもやるなら追加
+#     packages-audit:
+#       tags: frontend security
+#       run: yarn audit
+
+pre-commit:
+  parallel: true
+  commands:
+    rubocop:
+      tags: backend style
+      run: bundle exec rubocop
