@@ -28,7 +28,7 @@ jobs:
             !.github/**/*
             !.vscode/**/*
   rspec:
-    if: ${{needs.check-diff.outputs.get-diff}}
+    if: ${{needs.check-diff.outputs.diff}}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: check-diff
@@ -47,7 +47,7 @@ jobs:
         run: bundle exec rspec
 
   rubocop:
-    if: ${{needs.check-diff.outputs.get-diff}}
+    if: ${{needs.check-diff.outputs.diff}}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: check-diff
