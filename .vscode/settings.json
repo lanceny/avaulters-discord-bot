@@ -1,3 +1,4 @@
 {
+  // 末尾に1行改行を入れる
   "files.insertFinalNewline": true
 }
