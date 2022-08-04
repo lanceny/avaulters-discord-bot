@@ -7,7 +7,7 @@ RSpec.describe ApplicationController do
 
   describe 'try_spec' do
     it '正常系' do
-      expect(subject.try_spec).to eq(2)
+      expect(subject.try_spec).to eq(3)
     end
   end
 end
