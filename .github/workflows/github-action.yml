@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
-      get-diff: ${{ steps.get-diff.outputs }}
+      get-diff: ${{ steps.get-diff.outputs.diff }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
