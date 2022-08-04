@@ -12,14 +12,30 @@ jobs:
       - uses: rokroskar/workflow-run-cleanup-action@master
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-  check-diff:
+  # check-diff:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 5
+  #   outputs:
+  #     get-diff: ${{ steps.get-diff.outputs.diff }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #     - uses: technote-space/get-diff-action@v6
+  #       id: get-diff
+  #       with:
+  #         PATTERNS: |
+  #           **/*
+  #           !.github/**/*
+  #           !.vscode/**/*
+  rspec:
+    # if: ${{needs.check-diff.outputs.diff}}
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    outputs:
-      get-diff: ${{ steps.get-diff.outputs.diff }}
+    timeout-minutes: 10
+    # needs: check-diff
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - uses: technote-space/get-diff-action@v6
         id: get-diff
         with:
@@ -27,35 +43,40 @@ jobs:
             **/*
             !.github/**/*
             !.vscode/**/*
-  rspec:
-    if: ${{needs.check-diff.outputs.diff}}
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: check-diff
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
       - uses: ./.github/setup_actions/ruby
+        if: steps.get-diff.outputs.diff
 
       - name: Bundler and gem install
+        if: steps.get-diff.outputs.diff
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3 --path vendor/bundle
 
       - name: Run rspec
+        if: steps.get-diff.outputs.diff
         run: bundle exec rspec
 
   rubocop:
-    if: ${{needs.check-diff.outputs.diff}}
+    # if: ${{needs.check-diff.outputs.diff}}
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: check-diff
+    # needs: check-diff
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - uses: technote-space/get-diff-action@v6
+        id: get-diff
+        with:
+          PATTERNS: |
+            **/*
+            !.github/**/*
+            !.vscode/**/*
+
       - uses: ./.github/setup_actions/ruby
+        if: steps.get-diff.outputs.diff
 
       - name: Run rubocop
+        if: steps.get-diff.outputs.diff
         run: bundle exec rubocop
