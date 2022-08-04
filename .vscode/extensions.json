@@ -1,16 +1,16 @@
 {
-    "recommendations": [
-        "github.vscode-pull-request-github",
-        "ms-vsliveshare.vsliveshare",
-        "ms-azuretools.vscode-docker",
-        "esbenp.prettier-vscode",
-        "bung87.rails",
-        "rebornix.ruby",
-        "castwide.solargraph",
-        "misogi.ruby-rubocop",
-        "rubymaniac.vscode-direnv",
-        "miguel-savignano.ruby-symbols",
-        "bung87.vscode-gemfile",
-        "thadeu.vscode-run-rspec-file",
-    ]
+  "recommendations": [
+    "github.vscode-pull-request-github",
+    "ms-vsliveshare.vsliveshare",
+    "ms-azuretools.vscode-docker",
+    "esbenp.prettier-vscode",
+    "bung87.rails",
+    "rebornix.ruby",
+    "castwide.solargraph",
+    "misogi.ruby-rubocop",
+    "rubymaniac.vscode-direnv",
+    "miguel-savignano.ruby-symbols",
+    "bung87.vscode-gemfile",
+    "thadeu.vscode-run-rspec-file"
+  ]
 }
