@@ -1,5 +1,6 @@
 version: '3'
 services:
+  # Dockerfileを移動したのでちょっと修正する必要あり
   rails:
     build: .
     volumes:
@@ -8,3 +9,10 @@ services:
       - "3000:3000"
     tty: true
     stdin_open: true
+  # ここにdiscord_botのビルドを書く
+  discord_bot:
+    build:  
+    volumes:
+      - .:/
+    ports:
+      - ""
