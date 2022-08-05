@@ -1,0 +1,10 @@
+name: Setup for Ruby CI
+description: CIのためのRubyの設定
+
+runs:
+  using: "composite"
+  steps:
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.1.2"
+        bundler-cache: true

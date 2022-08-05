@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  cleanup-runs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@master
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+  check-diff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      get-diff: ${{ steps.get-diff.outputs.diff }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: technote-space/get-diff-action@v6
+        id: get-diff
+        with:
+          PATTERNS: |
+            **/*
+            !.github/**/*
+            !.vscode/**/*
+  rspec:
+    if: ${{needs.check-diff.outputs.get-diff}}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: check-diff
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1.2"
+          bundler-cache: true
+
+      - name: Bundler and gem install
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3 --path vendor/bundle
+
+      - name: Run rspec
+        run: bundle exec rspec
+
+  rubocop:
+    if: ${{needs.check-diff.outputs.get-diff}}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: check-diff
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1.2"
+          bundler-cache: true
+
+      - name: Run rubocop
+        run: bundle exec rubocop
