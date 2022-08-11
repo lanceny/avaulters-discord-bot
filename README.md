@@ -10,6 +10,9 @@ Things you may want to cover:
 * System dependencies
 
 * Configuration
+  | Environment Variables |                      Value                      |
+  | --------------------- | ----------------------------------------------- |
+  | DISCORD_BOT_TOKEN     | Set access token for discord bot **(Required)** |
 
 * Database creation
 
