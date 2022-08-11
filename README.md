@@ -1,24 +1,6 @@
 # avaulters-discord-bot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- 環境設定
+  |     環境変数      |                     説明                      |
+  | ----------------- | --------------------------------------------- |
+  | DISCORD_BOT_TOKEN | Discord BOT のトークンを設定します **(必須)** |

@@ -1,0 +1,10 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-thread_safety
+
+Documentation:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
